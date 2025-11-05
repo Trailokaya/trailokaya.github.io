@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Security: Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://trailokaya.com.np; style-src 'unsafe-inline'; script-src 'unsafe-inline'">
+
     <!-- Primary redirect method: Meta refresh with 0 delay -->
     <meta http-equiv="refresh" content="0; url=https://trailokaya.com.np/">
 
@@ -11,11 +14,10 @@
     <link rel="canonical" href="https://trailokaya.com.np/">
     <meta name="robots" content="noindex, follow">
 
-    <!-- Performance optimization: DNS prefetch, preconnect, and preload -->
+    <!-- Performance optimization: DNS prefetch and preconnect -->
     <link rel="dns-prefetch" href="https://trailokaya.com.np">
     <link rel="preconnect" href="https://trailokaya.com.np" crossorigin>
     <link rel="prefetch" href="https://trailokaya.com.np/">
-    <link rel="prerender" href="https://trailokaya.com.np/">
 
     <!-- Basic meta tags -->
     <title>Trailokaya Raj Bajgain</title>
@@ -34,87 +36,231 @@
     <meta name="twitter:description" content="Redirecting to Trailokaya Raj Bajgain's personal website">
 
     <style>
-      *{margin:0;padding:0;box-sizing:border-box}
-      body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#fff}
-      .container{text-align:center;animation:fadeIn 0.3s ease-in;max-width:600px;padding:2rem}
-      .spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 1.5rem}
-      h1{font-size:1.5rem;font-weight:600;margin-bottom:0.5rem;opacity:0.95}
-      p{opacity:0.8;font-size:0.95rem;margin-bottom:0.75rem}
-      a{color:#fff;text-decoration:underline;font-weight:500;transition:opacity 0.2s}
-      a:hover,a:focus{opacity:0.8;outline:2px solid rgba(255,255,255,0.5);outline-offset:2px}
-      .fallback-link{display:inline-block;margin-top:1rem;padding:0.75rem 1.5rem;background:rgba(255,255,255,0.2);border-radius:8px;text-decoration:none;font-weight:600;border:2px solid rgba(255,255,255,0.3);transition:all 0.2s}
-      .fallback-link:hover,.fallback-link:focus{background:rgba(255,255,255,0.3);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
-      .timeout-message{display:none;margin-top:1rem;padding:1rem;background:rgba(255,255,255,0.1);border-radius:8px;border-left:4px solid #ffd700}
-      .timeout-message.show{display:block;animation:slideIn 0.3s ease-out}
-      @keyframes spin{to{transform:rotate(360deg)}}
-      @keyframes fadeIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-      @keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
-      @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-      @media (max-width:480px){.container{padding:1rem}h1{font-size:1.25rem}p{font-size:0.875rem}}
+      /* === Base Styles === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #fff;
+      }
+
+      /* === Container === */
+      .container {
+        text-align: center;
+        animation: fadeIn 0.3s ease-in;
+        max-width: 600px;
+        padding: 2rem;
+      }
+
+      /* === Loading Spinner === */
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        margin: 0 auto 1.5rem;
+      }
+
+      /* === Typography === */
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        opacity: 0.95;
+      }
+
+      p {
+        opacity: 0.8;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+      }
+
+      /* === Links === */
+      a {
+        color: #fff;
+        text-decoration: underline;
+        font-weight: 500;
+        transition: opacity 0.2s;
+      }
+
+      a:hover,
+      a:focus {
+        opacity: 0.8;
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
+      }
+
+      .fallback-link {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.75rem 1.5rem;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        transition: all 0.2s;
+      }
+
+      .fallback-link:hover,
+      .fallback-link:focus {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      /* === Timeout Message === */
+      .timeout-message {
+        display: none;
+        margin-top: 1rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        border-left: 4px solid #ffd700;
+      }
+
+      .timeout-message.show {
+        display: block;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      /* === Animations === */
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* === Accessibility: Reduced Motion === */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+
+      /* === Responsive Design === */
+      @media (max-width: 480px) {
+        .container {
+          padding: 1rem;
+        }
+        h1 {
+          font-size: 1.25rem;
+        }
+        p {
+          font-size: 0.875rem;
+        }
+      }
     </style>
 
     <script>
-      // Multi-layer JavaScript redirect with comprehensive fail-safes
+      /**
+       * Multi-layer JavaScript redirect with comprehensive fail-safes
+       * Attempts redirect using multiple methods for maximum compatibility
+       */
       (function() {
         'use strict';
 
-        var targetUrl = 'https://trailokaya.com.np/';
+        // Configuration
+        var TARGET_URL = 'https://trailokaya.com.np/';
+        var TIMEOUT_DELAY = 3000; // Show warning after 3 seconds
         var redirectAttempted = false;
-        var timeoutDelay = 3000; // Show warning after 3 seconds
 
-        // Attempt redirect using multiple methods
+        /**
+         * Attempts to redirect using multiple browser APIs
+         * Tries methods in order of preference for best UX
+         */
         function attemptRedirect() {
-          if (redirectAttempted) return;
+          if (redirectAttempted) {
+            return;
+          }
           redirectAttempted = true;
 
+          // Method 1: window.location.replace (preferred - doesn't add to history)
           try {
-            // Method 1: window.location.replace (primary - doesn't add to history)
             if (window.location && typeof window.location.replace === 'function') {
-              window.location.replace(targetUrl);
+              window.location.replace(TARGET_URL);
               return;
             }
-          } catch (e) {
-            console.error('Redirect method 1 failed:', e);
+          } catch (err) {
+            console.error('Redirect method 1 (location.replace) failed:', err);
           }
 
+          // Method 2: window.location.assign (fallback - adds to history but reliable)
           try {
-            // Method 2: window.location.assign (fallback - adds to history but reliable)
             if (window.location && typeof window.location.assign === 'function') {
-              window.location.assign(targetUrl);
+              window.location.assign(TARGET_URL);
               return;
             }
-          } catch (e) {
-            console.error('Redirect method 2 failed:', e);
+          } catch (err) {
+            console.error('Redirect method 2 (location.assign) failed:', err);
           }
 
+          // Method 3: window.location.href (most compatible method)
           try {
-            // Method 3: window.location.href (fallback - most compatible)
             if (window.location) {
-              window.location.href = targetUrl;
+              window.location.href = TARGET_URL;
               return;
             }
-          } catch (e) {
-            console.error('Redirect method 3 failed:', e);
+          } catch (err) {
+            console.error('Redirect method 3 (location.href) failed:', err);
           }
 
+          // Method 4: document.location.href (alternative for older browsers)
           try {
-            // Method 4: document.location (alternative for older browsers)
             if (document.location) {
-              document.location.href = targetUrl;
+              document.location.href = TARGET_URL;
               return;
             }
-          } catch (e) {
-            console.error('Redirect method 4 failed:', e);
+          } catch (err) {
+            console.error('Redirect method 4 (document.location) failed:', err);
           }
 
           // If all methods fail, show timeout message immediately
+          console.error('All redirect methods failed');
           showTimeoutMessage();
         }
 
-        // Show timeout message if redirect hasn't occurred
+        /**
+         * Displays timeout message when redirect fails or takes too long
+         */
         function showTimeoutMessage() {
           var timeoutMsg = document.getElementById('timeout-message');
           var statusText = document.getElementById('status-text');
+
           if (timeoutMsg) {
             timeoutMsg.classList.add('show');
           }
@@ -123,29 +269,37 @@
           }
         }
 
-        // Check if redirect was successful after timeout
-        function checkRedirectSuccess() {
+        /**
+         * Schedules timeout check to show message if redirect hasn't completed
+         */
+        function scheduleTimeoutCheck() {
           setTimeout(function() {
-            // If we're still on this page after timeout, show message
-            if (!document.hidden && document.visibilityState !== 'hidden') {
+            // Only show message if page is still visible (redirect failed)
+            if (document.visibilityState !== 'hidden') {
               showTimeoutMessage();
             }
-          }, timeoutDelay);
+          }, TIMEOUT_DELAY);
         }
 
-        // Execute redirect immediately
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', function() {
+        /**
+         * Initializes redirect logic based on document ready state
+         */
+        function initialize() {
+          if (document.readyState === 'loading') {
+            // Wait for DOM to be ready
+            document.addEventListener('DOMContentLoaded', function() {
+              attemptRedirect();
+              scheduleTimeoutCheck();
+            });
+          } else {
+            // DOM is already ready, execute immediately
             attemptRedirect();
-            checkRedirectSuccess();
-          });
-        } else {
-          attemptRedirect();
-          checkRedirectSuccess();
+            scheduleTimeoutCheck();
+          }
         }
 
-        // Also attempt redirect immediately (before DOM ready for maximum speed)
-        attemptRedirect();
+        // Start initialization
+        initialize();
       })();
     </script>
   </head>
@@ -166,9 +320,15 @@
     <!-- Fallback for browsers with JavaScript disabled -->
     <noscript>
       <style>
-        .spinner{display:none}
-        #status-text{display:none}
-        .noscript-message{display:block!important}
+        .spinner {
+          display: none;
+        }
+        #status-text {
+          display: none;
+        }
+        .noscript-message {
+          display: block !important;
+        }
       </style>
       <div style="text-align:center;padding:2rem">
         <p class="noscript-message" style="font-size:1.125rem;margin-bottom:1rem">JavaScript is disabled. Redirecting via meta refresh...</p>
